@@ -77,9 +77,10 @@ function draw() {
     distScore = distScore + Math.round(getFrameRate()/60);
     bground.velocityX = -(6 + 3*distScore/100);
   
-    if(keyDown("space") && shark.y >= 400) {
+    if((keyDown("space")||touches.length>0) && shark.y >= 400) {
       //jumpSound.play();
       shark.velocityY = -14;
+      touches.length=0;
     }
   
     shark.velocityY = shark.velocityY + 0.8
@@ -125,7 +126,8 @@ function draw() {
     netsGroup.setLifetimeEach(-1);
     fishGroup.setLifetimeEach(-1);
     
-    if(mousePressedOver(restart)) {
+    if(mousePressedOver(restart)||touches.length>0) {
+      touches.length=0;
       reset();
     }
   }
